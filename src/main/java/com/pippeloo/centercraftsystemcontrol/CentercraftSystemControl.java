@@ -13,9 +13,7 @@ public final class CentercraftSystemControl extends JavaPlugin {
         // Log to console
         getLogger().info("CentercraftSystemControl has been enabled!");
 
-        // Build the config file if it doesn't exist
-
-
+        // Register commands
         registerCommands();
     }
 
