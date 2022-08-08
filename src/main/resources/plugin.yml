@@ -3,3 +3,7 @@ version: '${project.version}'
 main: com.pippeloo.centercraftsystemcontrol.CentercraftSystemControl
 api-version: 1.19
 authors: [ julestorfs ]
+commands:
+  ping:
+    description: Returns "Pong"
+    usage: /<command>

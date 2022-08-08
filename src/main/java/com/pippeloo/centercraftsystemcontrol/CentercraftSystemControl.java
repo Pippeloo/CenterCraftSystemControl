@@ -1,5 +1,6 @@
 package com.pippeloo.centercraftsystemcontrol;
 
+import com.pippeloo.centercraftsystemcontrol.commands.Ping;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CentercraftSystemControl extends JavaPlugin {
@@ -9,6 +10,8 @@ public final class CentercraftSystemControl extends JavaPlugin {
         // Plugin startup logic
         // Log to console
         getLogger().info("CentercraftSystemControl has been enabled!");
+
+        getCommand("ping").setExecutor(new Ping());
     }
 
     @Override
