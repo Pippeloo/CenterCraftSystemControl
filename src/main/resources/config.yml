@@ -1,0 +1,11 @@
+# ================================================
+# This is the config of CenterCraft System Control
+# Author: Jules Torfs (Pippeloo)
+# ================================================
+
+# =================== Messages ===================
+# Message when the player joins the server
+join-message: "Welcome to CenterCraft {player}!"
+
+# Message when the player leaves the server
+leave-message: "Goodbye {player}!"
