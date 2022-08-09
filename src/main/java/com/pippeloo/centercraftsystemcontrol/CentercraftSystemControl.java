@@ -1,6 +1,7 @@
 package com.pippeloo.centercraftsystemcontrol;
 
 import com.pippeloo.centercraftsystemcontrol.commands.Ping;
+import com.pippeloo.centercraftsystemcontrol.dataManagers.RedstoneSignsData;
 import com.pippeloo.centercraftsystemcontrol.events.Join;
 import com.pippeloo.centercraftsystemcontrol.events.Leave;
 import com.pippeloo.centercraftsystemcontrol.events.PlaceSign;
@@ -10,11 +11,16 @@ import java.util.Objects;
 
 public final class CentercraftSystemControl extends JavaPlugin {
 
+    public RedstoneSignsData redstoneSignsData;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
         // Log to console
         getLogger().info("CentercraftSystemControl has been enabled!");
+
+        // Load the database
+        this.redstoneSignsData = new RedstoneSignsData(this);
 
         // Load the config file
         this.getConfig().options().copyDefaults(true);
