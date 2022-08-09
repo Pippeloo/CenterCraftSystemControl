@@ -3,6 +3,7 @@ package com.pippeloo.centercraftsystemcontrol;
 import com.pippeloo.centercraftsystemcontrol.commands.Ping;
 import com.pippeloo.centercraftsystemcontrol.events.Join;
 import com.pippeloo.centercraftsystemcontrol.events.Leave;
+import com.pippeloo.centercraftsystemcontrol.events.PlaceSign;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -40,9 +41,11 @@ public final class CentercraftSystemControl extends JavaPlugin {
 
     // Register all the events
     private void registerEvents() {
-        // Register event from Join class
+        // Register event from Join
         getServer().getPluginManager().registerEvents(new Join(), this);
-        // Register event from Leave class
+        // Register event from Leave
         getServer().getPluginManager().registerEvents(new Leave(), this);
+        // Register event from Sign placement
+        getServer().getPluginManager().registerEvents(new PlaceSign(), this);
     }
 }
