@@ -1,13 +1,10 @@
 package com.pippeloo.centercraftsystemcontrol;
 
+import com.pippeloo.centercraftsystemcontrol.commands.CSC;
 import com.pippeloo.centercraftsystemcontrol.commands.Ping;
 import com.pippeloo.centercraftsystemcontrol.events.Join;
 import com.pippeloo.centercraftsystemcontrol.events.Leave;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -26,6 +23,8 @@ public final class CentercraftSystemControl extends JavaPlugin {
 
         // Register events
         this.registerEvents();
+        // Register commands
+        this.registerCommands();
     }
 
     @Override
@@ -43,33 +42,11 @@ public final class CentercraftSystemControl extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Leave(), this);
     }
 
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (label.equalsIgnoreCase("scs")) {
-            if (args.length == 0) {
-                // The command was executed without any arguments
-                sender.sendMessage(ChatColor.RED + "Please specify a command!");
-                return true;
-            }
-            if (args.length >= 1) {
-                // The command was executed with arguments
-                if (args[0].equalsIgnoreCase("ping")) {
-                    // The command was executed with the ping argument
-                    new Ping();
-                }
-            }
-        }
-        return false;
-    }
-
-    // Check the args for the command
-    private void getCommandArgs(String[] args) {
-        // Check the args for the command
-        if (args.length == 1) {
-            // Check the args for the command
-            if (args[0].equalsIgnoreCase("ping")) {
-                // Register the command
-                Objects.requireNonNull(getCommand("ping")).setExecutor(new Ping());
-            }
-        }
+    // Register all the commands
+    private void registerCommands() {
+        // Register command from Ping class
+        Objects.requireNonNull(getCommand("ping")).setExecutor(new Ping());
+        // Register command from CSC class
+        Objects.requireNonNull(getCommand("csc")).setExecutor(new CSC());
     }
 }
