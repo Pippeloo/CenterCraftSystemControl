@@ -17,7 +17,8 @@ public final class CentercraftSystemControl extends JavaPlugin {
 
         // Load the config file
         this.getConfig().options().copyDefaults(true);
-        this.saveConfig();
+        // Save the config file with comments (if it doesn't exist)
+        this.saveDefaultConfig();
 
         // Register commands
         this.registerCommands();
@@ -36,6 +37,7 @@ public final class CentercraftSystemControl extends JavaPlugin {
     private void registerCommands() {
         Objects.requireNonNull(getCommand("ping")).setExecutor(new Ping());
     }
+
     // Register all the events
     private void registerEvents() {
         // Register event from Join class
