@@ -7,3 +7,6 @@ commands:
   ping:
     description: Returns "Pong"
     usage: /<command>
+  disable:
+    description: Disables the plugin
+    usage: /<command>
