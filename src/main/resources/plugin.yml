@@ -7,3 +7,6 @@ commands:
   ping:
     description: Returns "Pong"
     usage: /<command>
+  csc:
+    description: The main command for this plugin
+    usage: /<command> subcommand
