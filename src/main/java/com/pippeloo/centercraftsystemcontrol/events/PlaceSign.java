@@ -18,7 +18,7 @@ public class PlaceSign implements Listener {
         this.plugin = plugin;
     }
 
-    // Create a function to get the plain text on a specific line of a sign
+    // This function gets the plain text on a specific line of a sign
     private String SignMessage(org.bukkit.event.block.SignChangeEvent signEvent, int line) {
         return PlainTextComponentSerializer.plainText().serialize(Objects.requireNonNull(signEvent.line(line)));
     }

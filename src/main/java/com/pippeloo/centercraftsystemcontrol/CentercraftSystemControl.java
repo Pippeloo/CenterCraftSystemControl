@@ -1,5 +1,6 @@
 package com.pippeloo.centercraftsystemcontrol;
 
+import com.pippeloo.centercraftsystemcontrol.commands.Disable;
 import com.pippeloo.centercraftsystemcontrol.commands.Ping;
 import com.pippeloo.centercraftsystemcontrol.dataManagers.RedstoneSignsData;
 import com.pippeloo.centercraftsystemcontrol.events.Join;
@@ -43,6 +44,8 @@ public final class CentercraftSystemControl extends JavaPlugin {
     // Register all the commands
     private void registerCommands() {
         Objects.requireNonNull(getCommand("ping")).setExecutor(new Ping());
+        // Register disable command
+        Objects.requireNonNull(getCommand("disable")).setExecutor(new Disable(this));
     }
 
     // Register all the events
