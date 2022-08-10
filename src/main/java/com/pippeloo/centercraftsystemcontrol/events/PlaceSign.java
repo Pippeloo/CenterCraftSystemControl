@@ -1,7 +1,6 @@
 package com.pippeloo.centercraftsystemcontrol.events;
 
 import com.pippeloo.centercraftsystemcontrol.CentercraftSystemControl;
-import com.pippeloo.centercraftsystemcontrol.dataManagers.RedstoneSignsData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.event.EventHandler;
@@ -11,7 +10,13 @@ import java.util.Objects;
 
 public class PlaceSign implements Listener {
 
-    CentercraftSystemControl plugin;
+    // Declare variables
+    private final CentercraftSystemControl plugin;
+
+    // Constructor
+    public PlaceSign(CentercraftSystemControl plugin) {
+        this.plugin = plugin;
+    }
 
     // Create a function to get the plain text on a specific line of a sign
     private String SignMessage(org.bukkit.event.block.SignChangeEvent signEvent, int line) {
@@ -23,7 +28,7 @@ public class PlaceSign implements Listener {
         // Check if the channel is already in the list
         if (!this.plugin.redstoneSignsData.getDataConfig().contains("channels." + channel)) {
             // If not, add it to the list
-            this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel, true);
+            this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel, (true));
             this.plugin.redstoneSignsData.saveData();
         }
     }

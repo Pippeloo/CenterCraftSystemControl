@@ -11,12 +11,14 @@ import java.util.logging.Level;
 
 public class RedstoneSignsData {
 
-    private CentercraftSystemControl plugin;
+    private final CentercraftSystemControl plugin;
     private FileConfiguration dataConfig = null;
     private File configFile = null;
 
     public RedstoneSignsData(CentercraftSystemControl plugin) {
         this.plugin = plugin;
+        // Saves / loads the config file
+        saveDefaultData();
     }
 
     public void reloadData() {

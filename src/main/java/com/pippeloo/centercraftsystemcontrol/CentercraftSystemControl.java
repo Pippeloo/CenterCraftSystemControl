@@ -52,6 +52,6 @@ public final class CentercraftSystemControl extends JavaPlugin {
         // Register event from Leave
         getServer().getPluginManager().registerEvents(new Leave(), this);
         // Register event from Sign placement
-        getServer().getPluginManager().registerEvents(new PlaceSign(), this);
+        getServer().getPluginManager().registerEvents(new PlaceSign(this), this);
     }
 }
