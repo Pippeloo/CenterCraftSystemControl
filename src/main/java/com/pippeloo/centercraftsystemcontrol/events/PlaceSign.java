@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class PlaceSign implements Listener {
 
@@ -24,13 +25,22 @@ public class PlaceSign implements Listener {
     }
 
     // This function will add the channel to redstoneSignsData
-    private void addChannel(String channel) {
-        // Check if the channel is already in the list
-        if (!this.plugin.redstoneSignsData.getDataConfig().contains("channels." + channel)) {
-            // If not, add it to the list
-            this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel, (true));
-            this.plugin.redstoneSignsData.saveData();
+    private void addChannel(String channel, int type, String owner, int x, int y, int z, boolean isOnWall, String world) {
+        String typeString = "Receiver";
+
+        if (type == 1) {
+            typeString = "Transmitter";
         }
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString + ".owner", owner);
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString +".x", x);
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString + ".y", y);
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString + ".z", z);
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString + ".isOnWall", isOnWall);
+        this.plugin.redstoneSignsData.getDataConfig().set("channels." + channel + "." + typeString + ".world", world);
+
+        // Save the config
+        this.plugin.redstoneSignsData.saveData();
+
     }
 
     // Execute the code when a sign is placed
@@ -39,7 +49,15 @@ public class PlaceSign implements Listener {
         final String header = SignMessage(event, 0);
 
         // Check if the first row is "[RSR]"
-        if (header.equals("[RSR]")) {
+        if (header.equals("[RSR]") || header.equals("[RST]")) {
+            // Set variable "type" depending on the header
+            final int type;
+            if (header.equals("[RSR]")) {
+                type = 0;
+            } else {
+                type = 1;
+            }
+
             // Get the sign message from the second row
             final String channel = SignMessage(event, 1);
 
@@ -50,8 +68,12 @@ public class PlaceSign implements Listener {
                 event.line(3, Component.text(""));
                 // Tell the player the information about the sign
                 event.getPlayer().sendMessage(Component.text(header + " Sign placed. Channel: " + channel));
+
+                // Save the event.block in a variable
+                final org.bukkit.block.Block block = event.getBlock();
+
                 // Add the channel to the list
-                addChannel(channel);
+                addChannel(channel, type, event.getPlayer().getUniqueId().toString(), block.getX(), block.getY(), block.getZ(), true, block.getWorld().getName());
             } else {
                 // Tell the player the information about the sign
                 event.getPlayer().sendMessage(Component.text(header + " Sign placed. No channel specified."));
